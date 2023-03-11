@@ -1,20 +1,19 @@
+import 'dotenv/config'
 import express from "express"
 import cors from 'cors'
 import { PrismaClient } from '@prisma/client'
 
-import {
-	convertHourStringToMinutes,
-	convertMinutesToHourString
-} from './utils/convertions'
+import { convertHourStringToMinutes, convertMinutesToHourString } from './utils/convertions'
 
 const server = express()
+const port = process.env.PORT ? Number(process.env.PORT) : 3333
 
 server.use(express.json())
 server.use(cors())
 
 const prisma = new PrismaClient()
 
-server.get('/games', async (req, res) => {
+server.get('/games', async (_, res) => {
 	const games = await prisma.game.findMany({
 		include: {
 			_count: {
@@ -96,6 +95,6 @@ server.get('/ads/:id/discord', async (req, res) => {
 	})
 })
 
-server.listen(3333, () => {
-	console.log('server running')
+server.listen(port, () => {
+	console.log(`server running on port ${port}`)
 })
