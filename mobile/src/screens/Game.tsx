@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import { Entypo } from '@expo/vector-icons'
 
+import { env } from '../../env'
 import { THEME } from '../theme'
 import logoImg from '../assets/logo-nlw-esports.png'
 import { GameParams } from '../@types/navigation'
@@ -22,13 +23,13 @@ export function Game() {
 	const [duoSelected, setDuoSelected] = useState('')
 
 	useEffect(() => {
-		fetch(`http://192.168.0.14:3333/games/${game.id}/ads`)
+		fetch(`${env.SERVER}/games/${game.id}/ads`)
 			.then(res => res.json())
 			.then(data => setDuos(data))
 	}, [game.id])
 
 	async function getDiscordUser(adsId: string) {
-		fetch(`http://192.168.0.14:3333/ads/${adsId}/discord`)
+		fetch(`${env.SERVER}/ads/${adsId}/discord`)
 			.then(res => res.json())
 			.then(data => setDuoSelected(data.discord))
 	}

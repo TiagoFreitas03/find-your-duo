@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 
 import logoImg from '../assets/logo-nlw-esports.png'
 
+import { env } from '../../env'
 import { Heading } from '../components/Heading'
 import { Background } from '../components/Background'
 import { GameCard, GameCardProps } from '../components/GameCard'
@@ -15,7 +16,7 @@ export function Home() {
 	const navigation = useNavigation()
 
 	useEffect(() => {
-		fetch('http://192.168.0.14:3333/games')
+		fetch(`${env.SERVER}/games`)
 			.then(res => res.json())
 			.then(data => {
 				setGames(data)
