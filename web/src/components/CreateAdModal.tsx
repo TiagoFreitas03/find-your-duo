@@ -18,7 +18,7 @@ export function CreateAdModal() {
 	const [useVoiceChannel, setUseVoiceChannel] = useState(false)
 
 	useEffect(() => {
-		axios('http://localhost:3333/games').then(res => setGames(res.data))
+		axios(`${import.meta.env.VITE_SERVER_URL}/games`).then(res => setGames(res.data))
 	}, [])
 
 	async function handleCreateAd(event: FormEvent) {
@@ -32,7 +32,7 @@ export function CreateAdModal() {
 			return
 
 		try {
-			await axios.post(`http://localhost:3333/games/${data.game}/ads`, {
+			await axios.post(`${import.meta.env.VITE_SERVER_URL}/games/${data.game}/ads`, {
 				name: data.name,
 				yearsPlaying: Number(data.yearsPlaying),
 				discord: data.discord,

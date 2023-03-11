@@ -22,7 +22,7 @@ export function App() {
 	const [games, setGames] = useState<Game[]>([])
 
 	useEffect(() => {
-		axios('http://localhost:3333/games').then(res => setGames(res.data))
+		axios(`${import.meta.env.VITE_SERVER_URL}/games`).then(res => setGames(res.data))
 	}, [])
 
 	return (
